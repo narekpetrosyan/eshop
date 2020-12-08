@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -37,7 +37,7 @@ class CategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('categories');
@@ -82,7 +82,7 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $category = Category::find($id);
         Storage::delete($category->image);

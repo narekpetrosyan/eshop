@@ -18,13 +18,15 @@ class BasketIsNotEmpty
     public function handle(Request $request, Closure $next)
     {
         $orderId = session('orderId');
-        if (!empty($orderId)){
-            $order = Order::find($orderId);
-            if ($order->products->count() == 0){
-                session()->flash('warning',"Basket is empty.");
-                return back();
+
+        if (!is_null($orderId)){
+            $order = Order::findOrFail($orderId);
+            if ($order->products->count() > 0){
+                return $next($request);
             }
         }
-        return $next($request);
+
+        session()->flash('warning',"Basket is empty.");
+        return redirect()->route('index');
     }
 }

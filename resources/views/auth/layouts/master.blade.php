@@ -29,10 +29,10 @@
 
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li @routeactive('categories.index')>
                         <a href="{{ route('categories.index') }}">Категории</a>
                     </li>
-                    <li>
+                    <li @routeactive('products.index')>
                         <a href="{{ route('products.index') }}">Товары</a>
                     <li>
 {{--                        <a href="{{ route('properties.index') }}">Свойства</a>--}}
@@ -41,17 +41,17 @@
 {{--                    <li>--}}
 {{--                        <a href="{{ route('merchants.index') }}">Поставщики</a>--}}
 {{--                    </li>--}}
-                    <li>
+                    <li @routeactive('home')>
                         <a href="{{ route('home') }}">Заказы</a>
                     </li>
                 </ul>
 
                 @guest
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item">
+                        <li class="nav-item @if(Route::currentRouteNamed('login')) active @endif">
                             <a class="nav-link" href="{{ route('login') }}">Войти</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item @if(Route::currentRouteNamed('register')) active @endif">
                             <a class="nav-link" href="{{ route('register') }}">Зарегистрироваться</a>
                         </li>
                     </ul>

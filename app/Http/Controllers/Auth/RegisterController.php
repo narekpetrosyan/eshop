@@ -33,7 +33,11 @@ class RegisterController extends Controller
 
     protected function redirectTo()
     {
-        return route('home');
+        if (auth()->user()->isAdmin()){
+            return route('categories.index');
+        }else{
+            return route('person.orders.index');
+        }
     }
 
     /**

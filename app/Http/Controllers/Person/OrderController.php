@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Person;
+
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('status',0)->get();
+        $orders = Auth::user()->orders()->where('status',1)->get();
         return view('auth.orders.index',compact('orders'));
     }
 
     public function show($id)
     {
         $order = Order::find($id);
+        dd(Auth::user()->orders->contains($order));
         return view('auth.orders.show',compact('order'));
     }
 }
